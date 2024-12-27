@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A Website for emergency phone numbers.">
+    <title>
+        Emergency Info
+    </title>
+    <link id="css" rel="stylesheet" type="text/css" href="../css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="../js/location.js" async></script>
+    <script src="../js/emergency-contact.js" async></script>
+</head>
+<body>
+<header class="containers">
+    <h1>
+        Emergency Info
+    </h1>
+    <p>Your location:</p>
+    <p id="location"></p>
+    <p id="geocodingDump"></p>
+    <p id="country">Country: </p>
+    <button onclick="getLocation()">
+        Get Location
+    </button>
+    <p id="emergencyContactsDump"></p>
+    <button onclick="getEmergencyContacts()">Get Emergency Contacts</button>
+    <p>countryCode: </p>
+    <p id="countryCode"></p>
+
+    <label for="select-state"></label>
+    <select id="select-state">
+        <option value="" selected>Select a state...</option>
+        <option value="AL">Alabama</option>
+        <option value="AK">Alaska</option>
+        <option value="AZ">Arizona</option>
+        <option value="AR">Arkansas</option>
+        <option value="CA">California</option>
+        <option value="CO">Colorado</option>
+        <option value="CT">Connecticut</option>
+        <option value="DE">Delaware</option>
+        <option value="DC">District of Columbia</option>
+        <option value="FL">Florida</option>
+        <option value="GA">Georgia</option>
+        <option value="HI">Hawaii</option>
+        <option value="ID">Idaho</option>
+        <option value="IL">Illinois</option>
+        <option value="IN">Indiana</option>
+    </select>
+</header>
+</body>
+</html>
