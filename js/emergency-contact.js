@@ -2,9 +2,9 @@
 //the data is stored locally. It might contain some errors or be incomplete.
 const emergencyContactsSource = "../resources/emergencyContactData.json";
 
-
+//Gets the emergency contact data, prepares them and passes them on for handling.
 function getEmergencyContacts() {
-    fetch(emergencyContactsSource,)
+    fetch(emergencyContactsSource)
         .then(response => {
             return response.json();
         })
@@ -17,11 +17,11 @@ function getEmergencyContacts() {
             if (filteredData.length > 0) {
                 return filteredData.at(0);
             } else {
+                //There was no country with the currently selected countryID
                 throw Error("Invalid country code");
             }
         })
         .then(data => {
-            console.log(JSON.stringify(data, null, 2));
             document.getElementById("emergencyContactsDump").textContent = JSON.stringify(data, null, 2);
             document.getElementById("emergencyContacts").innerHTML = handleEmergencyContacts(data);
         })
@@ -30,34 +30,50 @@ function getEmergencyContacts() {
         });
 }
 
+//Handles the emergency contact data that was fetched.
 function handleEmergencyContacts(emergencyContactJSON) {
-    if (emergencyContactJSON["localOnly"]) {
+    if (emergencyContactJSON["LocalOnly"]) {
         return `<p>You need to contact local emergency contacts. There is no service extending to all the country.</p>`;
+    } else if (emergencyContactJSON["NoData"]){
+        return `<p>There is no data for the selected country.</p>`
     } else if (hasDispatchNumbers(emergencyContactJSON)) {
-        return getDispatchNumbers(emergencyContactJSON);
+        return getNumbersOfCategory(emergencyContactJSON, "Dispatch", "Dispatch Numbers");
     }
 
+    //Otherwise get numbers for the services individually
     let emergencyString = "<dl>";
-    emergencyString += policeInformation(emergencyContactJSON);
-    emergencyString += fireInformation(emergencyContactJSON);
-    emergencyString += ambulanceInformation(emergencyContactJSON);
+    emergencyString += getPoliceInformation(emergencyContactJSON);
+    if (emergencyContactJSON["Member_112"]) {
+        console.log("112")
+        emergencyString += `<dt>Fire:</dt> <dd>112</dd>`;
+        emergencyString += `<dt>Ambulance:</dt> <dd>112</dd>`;
+    } else {
+        emergencyString += getFireInformation(emergencyContactJSON);
+        emergencyString += getAmbulanceInformation(emergencyContactJSON);
+    }
 
+    if (hasTrafficNumbers(emergencyContactJSON)) {
+        emergencyString += getNumbersOfCategory(emergencyContactJSON, "Traffic", "Traffic");
+    }
     return emergencyString + "</dl>";
 }
 
-function policeInformation(emergencyContactJSON) {
-    let returnString = "<dt> Police:";
-    return returnString + "</dt>";
+//Gets information on the police emergency contact numbers
+function getPoliceInformation(emergencyContactJSON) {
+    return getNumbersOfCategory(emergencyContactJSON, "Police", "Police");
 }
 
-function fireInformation(emergencyContactJSON) {
-    return "";
+//Gets information on the fire emergency contact numbers
+function getFireInformation(emergencyContactJSON) {
+    return getNumbersOfCategory(emergencyContactJSON, "Fire", "Fire");
 }
 
-function ambulanceInformation(emergencyContactJSON) {
-    return "";
+//Gets information on the ambulance emergency contact numbers
+function getAmbulanceInformation(emergencyContactJSON) {
+    return getNumbersOfCategory(emergencyContactJSON, "Ambulance", "Ambulance");
 }
 
+//Checks if the country has dispatch numbers.
 function hasDispatchNumbers(emergencyContactJSON) {
     let hasDispatch = false;
     let dispatch = emergencyContactJSON["Dispatch"];
@@ -78,19 +94,39 @@ function hasDispatchNumbers(emergencyContactJSON) {
     return false;
 }
 
-// Function that retrieves dispatch numbers. Only works if hasDispatchNumbers has been called before.
-function getDispatchNumbers(emergencyContactJSON) {
+function hasTrafficNumbers(emergencyContactJSON) {
+    let hasTraffic = false;
+    let traffic = emergencyContactJSON["Traffic"];
+    if (traffic) {
+        for (const key in traffic) {
+            if (Array.isArray(traffic[key]) && traffic[key].length > 0) {
+                traffic[key].forEach(number => {
+                    if (number != null && !isNaN(number) && number !== "") {// Ensure the number is not null
+                        hasTraffic = true;
+                    }
+                });
+                if (hasTraffic) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+// Function that retrieves numbers for a specific category and returns them in a descriptive list with keys and values.
+function getNumbersOfCategory(emergencyContactJSON, categoryName, label) {
     const dispatchNumbers = new Map();
-    let dispatch = emergencyContactJSON["Dispatch"];
+    let dispatch = emergencyContactJSON[categoryName];
     if (dispatch) {
         for (const key in dispatch) {
             dispatchNumbers.set(key, dispatch[key]);
         }
     }
-    let returnString = "<p>Dispatch Numbers:</p><dl>";
+    let returnString = `<p>${label}:</p><dl>`;
     dispatchNumbers.forEach((value, key) => {
         if (value) {
-            returnString += `<dt> ${key} </dt> <dd> ${value}</dd>`;
+            returnString += `<dt> ${key}: </dt> <dd> ${value}</dd>`;
         }
     });
     return returnString += "</dl>"

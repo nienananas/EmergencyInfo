@@ -38,9 +38,9 @@ function getCountryFromPosition(position) {
         })
         .then(data => {
             document.getElementById("country").textContent = data["address"]["country"];
-            document.getElementById("dump").textContent = JSON.stringify(data);
+            document.getElementById("geocodingDump").textContent = JSON.stringify(data);
             countryCode = data["address"]["country_code"];
-            document.getElementById("error").innerHTML = countryCode;
+            document.getElementById("countryCode").innerHTML = countryCode;
         })
         .catch(error => {
             console.error('Error:', error);
