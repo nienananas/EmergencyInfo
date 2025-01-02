@@ -3,7 +3,7 @@
 const emergencyContactsSource = "../resources/emergencyContactData.json";
 
 //Gets the emergency contact data, prepares them and passes them on for handling.
-function getEmergencyContacts() {
+function getEmergencyContacts(countryCode) {
     fetch(emergencyContactsSource)
         .then(response => {
             return response.json();
@@ -22,8 +22,8 @@ function getEmergencyContacts() {
             }
         })
         .then(data => {
-            document.getElementById("emergencyContactsDump").textContent = JSON.stringify(data, null, 2);
-            document.getElementById("emergencyContacts").innerHTML = handleEmergencyContacts(data);
+            //document.getElementById("emergencyContactsDump").textContent = JSON.stringify(data, null, 2);
+            document.getElementById("locationEmergencyContacts").innerHTML = handleEmergencyContacts(data);
         })
         .catch(error => {
             console.error('Error:', error);
@@ -36,7 +36,7 @@ function handleEmergencyContacts(emergencyContactJSON) {
         return `<p>You need to contact local emergency contacts. There is no service extending to all the country.</p>`;
     } else if (emergencyContactJSON["NoData"]){
         return `<p>There is no data for the selected country.</p>`
-    } else if (hasDispatchNumbers(emergencyContactJSON)) {
+    } else if (hasNumbersInCategory(emergencyContactJSON, "Dispatch")) {
         return getNumbersOfCategory(emergencyContactJSON, "Dispatch", "Dispatch Numbers");
     }
 
@@ -52,7 +52,7 @@ function handleEmergencyContacts(emergencyContactJSON) {
         emergencyString += getAmbulanceInformation(emergencyContactJSON);
     }
 
-    if (hasTrafficNumbers(emergencyContactJSON)) {
+    if (hasNumbersInCategory(emergencyContactJSON, "Traffic")) {
         emergencyString += getNumbersOfCategory(emergencyContactJSON, "Traffic", "Traffic");
     }
     return emergencyString + "</dl>";
@@ -73,39 +73,19 @@ function getAmbulanceInformation(emergencyContactJSON) {
     return getNumbersOfCategory(emergencyContactJSON, "Ambulance", "Ambulance");
 }
 
-//Checks if the country has dispatch numbers.
-function hasDispatchNumbers(emergencyContactJSON) {
-    let hasDispatch = false;
-    let dispatch = emergencyContactJSON["Dispatch"];
-    if (dispatch) {
-        for (const key in dispatch) {
-            if (Array.isArray(dispatch[key]) && dispatch[key].length > 0) {
-                dispatch[key].forEach(number => {
+//Checks if the country has numbers in a certain category.
+function hasNumbersInCategory(emergencyContactJSON, categoryName) {
+    let hasNumbers = false;
+    let category = emergencyContactJSON[categoryName];
+    if (category) {
+        for (const key in category) {
+            if (Array.isArray(category[key]) && category[key].length > 0) {
+                category[key].forEach(number => {
                     if (number != null && !isNaN(number) && number !== "") {// Ensure the number is not null
-                        hasDispatch = true;
+                        hasNumbers = true;
                     }
                 });
-                if (hasDispatch) {
-                    return true;
-                }
-            }
-        }
-    }
-    return false;
-}
-
-function hasTrafficNumbers(emergencyContactJSON) {
-    let hasTraffic = false;
-    let traffic = emergencyContactJSON["Traffic"];
-    if (traffic) {
-        for (const key in traffic) {
-            if (Array.isArray(traffic[key]) && traffic[key].length > 0) {
-                traffic[key].forEach(number => {
-                    if (number != null && !isNaN(number) && number !== "") {// Ensure the number is not null
-                        hasTraffic = true;
-                    }
-                });
-                if (hasTraffic) {
+                if (hasNumbers) {
                     return true;
                 }
             }

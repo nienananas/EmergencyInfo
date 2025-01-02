@@ -5582,7 +5582,7 @@
   },
   {
     "Country": {
-      "Name": "Saint Helena, Ascension and Tristan da Cunha",
+      "Name": "Saint Helena",
       "ISOCode": "SH",
       "ISONumeric": "654"
     },
@@ -5699,6 +5699,7 @@
     },
     "Member_112": false,
     "LocalOnly": false,
+    "NoData": true,
     "Notes": ""
   },
   {
@@ -5729,6 +5730,7 @@
     },
     "Member_112": false,
     "LocalOnly": false,
+    "NoData": true,
     "Notes": ""
   },
   {
@@ -6241,6 +6243,7 @@
     },
     "Member_112": false,
     "LocalOnly": false,
+    "NoData": true,
     "Notes": ""
   },
   {
@@ -6271,6 +6274,7 @@
     },
     "Member_112": false,
     "LocalOnly": false,
+    "NoData": true,
     "Notes": ""
   },
   {
@@ -6421,6 +6425,7 @@
     },
     "Member_112": false,
     "LocalOnly": false,
+    "NoData": true,
     "Notes": ""
   },
   {

@@ -1,0 +1,15 @@
+dt {
+    font-weight: bold;
+}
+
+dd {
+    margin: 0;
+    padding: 0 0 0.5em 0;
+}
+
+.element {
+    margin: 0.4em;
+    padding: 0.4em;
+    border: black solid 3px;
+    border-radius: 5px;
+}
