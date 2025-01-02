@@ -1,14 +1,12 @@
-//API for doing reverse geocoding (location -> country) from openstreetmap
+//API for doing reverse geocoding (location -> OSM object) from openstreetmap
 const reverseGeocodingApiURL = "https://nominatim.openstreetmap.org/reverse"
 
 //Location of the data source for the mappings between countries and their respective country code.
 //The source provided here is from https://gist.github.com/kalinchernev/486393efcca01623b18d and was updated a bit.
 const countryCodesSource = "../resources/countryCodes.json"
 
-let locationCountryCode = "US";
-let selectedCountryCode = "US";
-
-//Gets the current location of the device if supported
+//Gets the current location of the device if supported.
+//If supported, the position is passed on for handling. Otherwise, an error message is displayed.
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(handlePosition);
@@ -17,17 +15,30 @@ function getLocation() {
     }
 }
 
-//Handles the position by displaying it and retrieving the country for the position
+//Handles the current position of the device.
+//First more information about the position such as the current address is retrieved and displayed.
+//Then the emergency contact information about the current country is retrieved and displayed.
 function handlePosition(position) {
-    //document.getElementById("location").innerHTML = "Latitude: " + position.coords.latitude +
-    //    "<br>Longitude: " + position.coords.longitude;
-    getCountryFromPosition(position).then(
+    getCountryInformation(position).then(
+        data => {
+            let countryCode = data["address"]["country_code"]
+            document.getElementById("locationCountry").textContent = data["address"]["country"];
+            getEmergencyContacts(countryCode).then(
+                emergencyContacts => {
+                    document.getElementById("locationEmergencyContacts").innerHTML = handleEmergencyContacts(emergencyContacts);
+                }
+            );
+        }
+    ).catch(error => {
+            console.log(error);
+            document.getElementById("locationError").innerHTML = "Error: " + error.message;
+        }
     );
-    sortCountryCodes()
 }
 
-//Uses the reverse geocoding API to retrieve the country from the position
-function getCountryFromPosition(position) {
+//Uses the reverse geocoding API to retrieve data about the country (OSM object) from the position.
+//Returns a promise containing the data or throws an error if something is wrong with the request.
+function getCountryInformation(position) {
     return fetch(reverseGeocodingApiURL + `?lat=${position.coords.latitude}&lon=${position.coords.longitude}&format=json`)
         .then(response => {
             if (!response.ok) {
@@ -42,51 +53,43 @@ function getCountryFromPosition(position) {
             }
             return response.json();
         })
-        .then(data => {
-            document.getElementById("country").textContent = data["address"]["country"];
-            //document.getElementById("geocodingDump").textContent = JSON.stringify(data);
-            locationCountryCode = data["address"]["country_code"];
-            document.getElementById("countryCode").innerHTML = locationCountryCode;
-            getEmergencyContacts(locationCountryCode);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
 }
 
-//Gets the country selected in the country select dropdown.
-function getSelectedCountryCode() {
+//Function that handles the input of a selected country.
+//Retrieves the selected country code and gets the emergency information for the country and displays it.
+//On error, the error message is displayed.
+function handleSelectedCountry() {
+    getSelectedCountry().then(country => {
+        document.getElementById("selectedCountry").innerHTML = country["country"];
+        getEmergencyContacts(country["iso_code"]).then(emergencyContacts => {
+                document.getElementById("selectedEmergencyContacts").innerHTML = handleEmergencyContacts(emergencyContacts);
+                document.getElementById("selectedEmergencyContactsField").style.visibility = "visible";
+            }
+        )
+    }).catch(error => {
+            console.log(error);
+            document.getElementById("selectedError").innerHTML = "Error: " + error.message;
+        }
+    )
+}
+
+//Gets the country code of the country selected in the country select dropdown.
+//Returns a promise containing the country code on success.
+//Throws an error if an invalid country is selected.
+function getSelectedCountry() {
     const selectedCountry = document.getElementById("countrySearch").value;
-    console.log(selectedCountry);
     return fetch(countryCodesSource).then(response => {
         return response.json()
     }).then(dataJSON => {
-        console.log(JSON.stringify(dataJSON));
+        //Filtering for the country that matches the name of the selected country.
         const filteredData = dataJSON.filter(function (item) {
             return item["country"] === selectedCountry;
         })
         if (filteredData.length > 0) {
             return filteredData.at(0);
         } else {
+            //No matching country found.
             throw Error("Invalid country selected");
         }
-    }).then(data => {
-            selectedCountryCode = data["iso_code"]
-            document.getElementById("selectedCountryCode").innerHTML = selectedCountryCode;
-            getEmergencyContacts(selectedCountryCode);
-        }
-    )
-}
-
-function sortCountryCodes() {
-    fetch(countryCodesSource).then(response => {
-        return response.json()
-    }).then(data => {
-            data.sort(function (a, b) {
-                return a["country"] < b["country"];
-            })
-            console.log(JSON.stringify(data));
-
-        }
-    )
+    });
 }

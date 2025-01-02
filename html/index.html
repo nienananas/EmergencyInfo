@@ -14,36 +14,30 @@
 </head>
 <body onload="getLocation()">
 <header>
+    <img id="headerImage" src="../resources/ambulance.png" alt="A logo of an ambulance">
     <h1>
         Emergency Info
     </h1>
 </header>
-<div id="currentLocation" class="element">
+<div id="currentLocation" class="wrapper-element">
     <p class="errorMessage" id="locationError"></p>
     <div>
-        <p>Your Country:</p>
-        <p id="country"></p>
-        <p id="countryCode"></p>
+        <p class="headerText">Your Country:</p>
+        <p id="locationCountry">Loading...</p>
     </div>
     <div class="emergencyContacts" id="locationEmergencyContactsField">
-        <p>Emergency Contacts:</p>
-        <p id="locationEmergencyContacts"></p>
+        <p>Emergency Contacts</p>
+        <div id="locationEmergencyContacts">Loading...</div>
     </div>
-    <!--<p>Your location:</p>
-    <p id="location"></p>
-    <p id="geocodingDump"></p>-->
-
     <button onclick="getLocation()">
         Reload
     </button>
-
-
-    <p id="emergencyContactsDump"></p>
 </div>
 
-<div id="selectedLocation" class="element">
+<div id="selectedLocation" class="wrapper-element">
+    <p class="errorMessage" id="selectedError"></p>
     <div>
-        <label for="countrySearch">Search for a country:</label>
+        <label for="countrySearch" id="searchLabel">Search for a country:</label>
         <input list="countryList" id="countrySearch" name="countrySearch"/>
         <datalist id="countryList">
             <option>Afghanistan</option>
@@ -283,13 +277,13 @@
             <option>Zambia</option>
             <option>Zimbabwe</option>
         </datalist>
-        <button onclick="getSelectedCountryCode()">Choose country</button>
+        <button onclick="handleSelectedCountry()">Choose country</button>
     </div>
-    <p>Selected country Code</p>
-    <p id="selectedCountryCode"></p>
+    <p class="headerText">Selected country:</p>
+    <p id="selectedCountry">Select a country</p>
     <div class="emergencyContacts" id="selectedEmergencyContactsField">
-        <p>Emergency Contacts:</p>
-        <p id="selectedEmergencyContacts"></p>
+        <p>Emergency Contacts</p>
+        <div id="selectedEmergencyContacts"></div>
     </div>
 </div>
 </body>
