@@ -3,6 +3,7 @@ const reverseGeocodingApiURL = "https://nominatim.openstreetmap.org/reverse";
 
 //Location of the data source for the mappings between countries and their respective country code.
 //The source provided here is from https://gist.github.com/kalinchernev/486393efcca01623b18d and was updated a bit.
+//Because the site is hosted on github pages, the src path is appended by "/EmergencyInfo".
 const countryCodesSource = "../EmergencyInfo/resources/countryCodes.json";
 
 //Gets the current location of the device if supported.
@@ -61,10 +62,9 @@ function getCountryInformation(position) {
 //On error, the error message is displayed.
 function handleSelectedCountry() {
     getSelectedCountry().then(country => {
-        document.getElementById("selectedCountry").innerHTML = country["country"];
         getEmergencyContacts(country["iso_code"]).then(emergencyContacts => {
                 document.getElementById("selectedEmergencyContacts").innerHTML = handleEmergencyContacts(emergencyContacts);
-                document.getElementById("selectedEmergencyContactsField").style.visibility = "visible";
+                document.getElementById("selectedEmergencyContactsField").style.display = "block";
             }
         )
         //Remove potential earlier error messages.
@@ -80,7 +80,7 @@ function handleSelectedCountry() {
 //Returns a promise containing the country code on success.
 //Throws an error if an invalid country is selected.
 function getSelectedCountry() {
-    const selectedCountry = document.getElementById("countrySearch").value;
+    const selectedCountry = document.getElementById("dropdownField").value;
     return fetch(countryCodesSource).then(response => {
         return response.json()
     }).then(dataJSON => {

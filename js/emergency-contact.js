@@ -1,5 +1,6 @@
 //Since the emergencynumberapi (https://emergencynumberapi.com/) does not send CORS headers in the reply,
 //the data is stored locally. It might contain some errors or be incomplete.
+//Because the site is hosted on github pages, the src path is appended by "/EmergencyInfo".
 const emergencyContactsSource = "../EmergencyInfo/resources/emergencyContactData.json";
 
 //Gets the emergency contact data, prepares them and passes them on for handling.

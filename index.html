@@ -11,6 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="js/location.js" async></script>
     <script src="js/emergency-contact.js" async></script>
+    <script src="js/dropdown-search.js" async></script>
 </head>
 <body onload="getLocation()">
 <header>
@@ -33,294 +34,266 @@
         Reload
     </button>
 </div>
-
 <div id="selectedLocation" class="wrapper-element">
     <p class="errorMessage" id="selectedError"></p>
     <div>
-        <label for="countrySearch" id="searchLabel">Search for a country:</label>
-        <input list="countryList" id="countrySearch" name="countrySearch"/>
-        <datalist id="countryList">
-            <option>Afghanistan</option>
-            <option>Albania</option>
-            <option>Algeria</option>
-            <option>American Samoa</option>
-            <option>Andorra</option>
-            <option>Angola</option>
-            <option>Anguilla</option>
-            <option>Antarctica</option>
-            <option>Antigua and Barbuda</option>
-            <option>Argentina</option>
-            <option>Armenia</option>
-            <option>Aruba</option>
-            <option>Australia</option>
-            <option>Austria</option>
-            <option>Azerbaijan</option>
-            <option>Bahamas</option>
-            <option>Bahrain</option>
-            <option>Bangladesh</option>
-            <option>Barbados</option>
-            <option>Belarus</option>
-            <option>Belgium</option>
-            <option>Belize</option>
-            <option>Benin</option>
-            <option>Bermuda</option>
-            <option>Bhutan</option>
-            <option>Bolivia</option>
-            <option>Bosnia and Herzegovina</option>
-            <option>Botswana</option>
-            <option>Bouvet Island</option>
-            <option>Brazil</option>
-            <option>British Indian Ocean Territory</option>
-            <option>British Virgin Islands</option>
-            <option>Brunei</option>
-            <option>Bulgaria</option>
-            <option>Burkina Faso</option>
-            <option>Burma</option>
-            <option>Burundi</option>
-            <option>Cambodia</option>
-            <option>Cameroon</option>
-            <option>Canada</option>
-            <option>Cape Verde</option>
-            <option>Cayman Islands</option>
-            <option>Central African Rep</option>
-            <option>Chad</option>
-            <option>Chile</option>
-            <option>China</option>
-            <option>Christmas Island</option>
-            <option>Cocos Islands</option>
-            <option>Colombia</option>
-            <option>Comoros</option>
-            <option>Congo-Brazzaville</option>
-            <option>Congo-Kinshasa</option>
-            <option>Cook Islands</option>
-            <option>Costa Rica</option>
-            <option>Croatia</option>
-            <option>Cuba</option>
-            <option>Cyprus</option>
-            <option>Czech Republic</option>
-            <option>Denmark</option>
-            <option>Djibouti</option>
-            <option>Dominica</option>
-            <option>Dominican Republic</option>
-            <option>Ecuador</option>
-            <option>Egypt</option>
-            <option>El Salvador</option>
-            <option>Equatorial Guinea</option>
-            <option>Eritrea</option>
-            <option>Estonia</option>
-            <option>Ethiopia</option>
-            <option>Falkland Islands</option>
-            <option>Faroe Islands</option>
-            <option>Fiji</option>
-            <option>Finland</option>
-            <option>France</option>
-            <option>French Guiana</option>
-            <option>French Polynesia</option>
-            <option>French Southern Territories</option>
-            <option>Gabon</option>
-            <option>Gambia</option>
-            <option>Georgia</option>
-            <option>Germany</option>
-            <option>Ghana</option>
-            <option>Gibraltar</option>
-            <option>Greece</option>
-            <option>Grenada</option>
-            <option>Greenland</option>
-            <option>Grenada</option>
-            <option>Guadeloupe</option>
-            <option>Guam</option>
-            <option>Guatemala</option>
-            <option>Guinea</option>
-            <option>Guinea-Bissau</option>
-            <option>Guyana</option>
-            <option>Haiti</option>
-            <option>Heard Island and McDonalds Islands</option>
-            <option>Honduras</option>
-            <option>Hong Kong</option>
-            <option>Hungary</option>
-            <option>Iceland</option>
-            <option>India</option>
-            <option>Indonesia</option>
-            <option>Iran</option>
-            <option>Iraq</option>
-            <option>Ireland</option>
-            <option>Israel</option>
-            <option>Italy</option>
-            <option>Ivory Coast</option>
-            <option>Jamaica</option>
-            <option>Japan</option>
-            <option>Jordan</option>
-            <option>Kazakhstan</option>
-            <option>Kenya</option>
-            <option>Kiribati</option>
-            <option>Kosovo</option>
-            <option>Kuwait</option>
-            <option>Kyrgyzstan</option>
-            <option>Laos</option>
-            <option>Latvia</option>
-            <option>Lebanon</option>
-            <option>Lesotho</option>
-            <option>Liberia</option>
-            <option>Libya</option>
-            <option>Liechtenstein</option>
-            <option>Lithuania</option>
-            <option>Luxembourg</option>
-            <option>Macau</option>
-            <option>Macedonia</option>
-            <option>Madagascar</option>
-            <option>Malawi</option>
-            <option>Malaysia</option>
-            <option>Maldives</option>
-            <option>Mali</option>
-            <option>Malta</option>
-            <option>Marshall Islands</option>
-            <option>Martinique</option>
-            <option>Mauritania</option>
-            <option>Mauritius</option>
-            <option>Mayotte</option>
-            <option>Mexico</option>
-            <option>Micronesia</option>
-            <option>Moldova</option>
-            <option>Monaco</option>
-            <option>Mongolia</option>
-            <option>Montenegro</option>
-            <option>Montserrat</option>
-            <option>Morocco</option>
-            <option>Mozambique</option>
-            <option>Myanmar</option>
-            <option>Namibia</option>
-            <option>Nauru</option>
-            <option>Nepal</option>
-            <option>Netherlands Antilles</option>
-            <option>Netherlands</option>
-            <option>New Caledonia</option>
-            <option>New Zealand</option>
-            <option>Nicaragua</option>
-            <option>Niger</option>
-            <option>Nigeria</option>
-            <option>Niue</option>
-            <option>Norfolk Island</option>
-            <option>North Korea</option>
-            <option>Norway</option>
-            <option>Oman</option>
-            <option>Pakistan</option>
-            <option>Palau</option>
-            <option>Panama</option>
-            <option>Papua New Guinea</option>
-            <option>Paraguay</option>
-            <option>Peru</option>
-            <option>Philippines</option>
-            <option>Pitcairn</option>
-            <option>Poland</option>
-            <option>Portugal</option>
-            <option>Puerto Rico</option>
-            <option>Qatar</option>
-            <option>Reunion</option>
-            <option>Romania</option>
-            <option>Russia</option>
-            <option>Rwanda</option>
-            <option>Saint Helena</option>
-            <option>Saint Kitts and Nevis</option>
-            <option>Saint Lucia</option>
-            <option>Saint Pierre and Miquelon</option>
-            <option>Saint Vincent and the Grenadines</option>
-            <option>Samoa</option>
-            <option>San Marino</option>
-            <option>Sao Tome and Principe</option>
-            <option>Saudi Arabia</option>
-            <option>Senegal</option>
-            <option>Serbia</option>
-            <option>Seychelles</option>
-            <option>Sierra Leone</option>
-            <option>Singapore</option>
-            <option>Slovakia</option>
-            <option>Slovenia</option>
-            <option>Solomon Islands</option>
-            <option>Somalia</option>
-            <option>South Africa</option>
-            <option>South Georgia and the South Sandwich Islands</option>
-            <option>South Korea</option>
-            <option>Spain</option>
-            <option>Sri Lanka</option>
-            <option>Sudan</option>
-            <option>Suriname</option>
-            <option>Swaziland</option>
-            <option>Sweden</option>
-            <option>Switzerland</option>
-            <option>Syria</option>
-            <option>Taiwan</option>
-            <option>Tajikistan</option>
-            <option>Tanzania</option>
-            <option>Thailand</option>
-            <option>Togo</option>
-            <option>Tokelau</option>
-            <option>Tonga</option>
-            <option>Trinidad and Tobago</option>
-            <option>Tunisia</option>
-            <option>Turkey</option>
-            <option>Turkmenistan</option>
-            <option>Turks and Caicos Islands</option>
-            <option>Tuvalu</option>
-            <option>U.S. Virgin Islands</option>
-            <option>Uganda</option>
-            <option>Ukraine</option>
-            <option>United Arab Emirates</option>
-            <option>United Kingdom</option>
-            <option selected>United States</option>
-            <option>Uruguay</option>
-            <option>Uzbekistan</option>
-            <option>Vanuatu</option>
-            <option>Vatican City</option>
-            <option>Venezuela</option>
-            <option>Vietnam</option>
-            <option>Yemen</option>
-            <option>Zambia</option>
-            <option>Zimbabwe</option>
-        </datalist>
+        <div class="dropdownBox" id="countryDropdown">
+            <div class="selectedItem">
+                <label for="dropdownField" id="dropdownFieldLabel">Selected country:</label>
+                <input type="text" name="" placeholder="Select a country" readonly=readonly id="dropdownField">
+            </div>
+            <div class="dropdownContent">
+                <div class="searchInput">
+                    <label for="searchBox">Search for a country:</label>
+                    <input type="text" id="searchBox">
+                </div>
+                <ul>
+                    <li class="dropdownItem selected">Select</li>
+                    <li class="dropdownItem">Afghanistan</li>
+                    <li class="dropdownItem">Albania</li>
+                    <li class="dropdownItem">Algeria</li>
+                    <li class="dropdownItem">American Samoa</li>
+                    <li class="dropdownItem">Andorra</li>
+                    <li class="dropdownItem">Angola</li>
+                    <li class="dropdownItem">Anguilla</li>
+                    <li class="dropdownItem">Antarctica</li>
+                    <li class="dropdownItem">Antigua and Barbuda</li>
+                    <li class="dropdownItem">Argentina</li>
+                    <li class="dropdownItem">Armenia</li>
+                    <li class="dropdownItem">Aruba</li>
+                    <li class="dropdownItem">Australia</li>
+                    <li class="dropdownItem">Austria</li>
+                    <li class="dropdownItem">Azerbaijan</li>
+                    <li class="dropdownItem">Bahamas</li>
+                    <li class="dropdownItem">Bahrain</li>
+                    <li class="dropdownItem">Bangladesh</li>
+                    <li class="dropdownItem">Barbados</li>
+                    <li class="dropdownItem">Belarus</li>
+                    <li class="dropdownItem">Belgium</li>
+                    <li class="dropdownItem">Belize</li>
+                    <li class="dropdownItem">Benin</li>
+                    <li class="dropdownItem">Bermuda</li>
+                    <li class="dropdownItem">Bhutan</li>
+                    <li class="dropdownItem">Bolivia</li>
+                    <li class="dropdownItem">Bosnia and Herzegovina</li>
+                    <li class="dropdownItem">Botswana</li>
+                    <li class="dropdownItem">Bouvet Island</li>
+                    <li class="dropdownItem">Brazil</li>
+                    <li class="dropdownItem">British Indian Ocean Territory</li>
+                    <li class="dropdownItem">British Virgin Islands</li>
+                    <li class="dropdownItem">Brunei</li>
+                    <li class="dropdownItem">Bulgaria</li>
+                    <li class="dropdownItem">Burkina Faso</li>
+                    <li class="dropdownItem">Burma</li>
+                    <li class="dropdownItem">Burundi</li>
+                    <li class="dropdownItem">Cambodia</li>
+                    <li class="dropdownItem">Cameroon</li>
+                    <li class="dropdownItem">Canada</li>
+                    <li class="dropdownItem">Cape Verde</li>
+                    <li class="dropdownItem">Cayman Islands</li>
+                    <li class="dropdownItem">Central African Rep</li>
+                    <li class="dropdownItem">Chad</li>
+                    <li class="dropdownItem">Chile</li>
+                    <li class="dropdownItem">China</li>
+                    <li class="dropdownItem">Christmas Island</li>
+                    <li class="dropdownItem">Cocos Islands</li>
+                    <li class="dropdownItem">Colombia</li>
+                    <li class="dropdownItem">Comoros</li>
+                    <li class="dropdownItem">Congo-Brazzaville</li>
+                    <li class="dropdownItem">Congo-Kinshasa</li>
+                    <li class="dropdownItem">Cook Islands</li>
+                    <li class="dropdownItem">Costa Rica</li>
+                    <li class="dropdownItem">Croatia</li>
+                    <li class="dropdownItem">Cuba</li>
+                    <li class="dropdownItem">Cyprus</li>
+                    <li class="dropdownItem">Czech Republic</li>
+                    <li class="dropdownItem">Denmark</li>
+                    <li class="dropdownItem">Djibouti</li>
+                    <li class="dropdownItem">Dominica</li>
+                    <li class="dropdownItem">Dominican Republic</li>
+                    <li class="dropdownItem">Ecuador</li>
+                    <li class="dropdownItem">Egypt</li>
+                    <li class="dropdownItem">El Salvador</li>
+                    <li class="dropdownItem">Equatorial Guinea</li>
+                    <li class="dropdownItem">Eritrea</li>
+                    <li class="dropdownItem">Estonia</li>
+                    <li class="dropdownItem">Ethiopia</li>
+                    <li class="dropdownItem">Falkland Islands</li>
+                    <li class="dropdownItem">Faroe Islands</li>
+                    <li class="dropdownItem">Fiji</li>
+                    <li class="dropdownItem">Finland</li>
+                    <li class="dropdownItem">France</li>
+                    <li class="dropdownItem">French Guiana</li>
+                    <li class="dropdownItem">French Polynesia</li>
+                    <li class="dropdownItem">French Southern Territories</li>
+                    <li class="dropdownItem">Gabon</li>
+                    <li class="dropdownItem">Gambia</li>
+                    <li class="dropdownItem">Georgia</li>
+                    <li class="dropdownItem">Germany</li>
+                    <li class="dropdownItem">Ghana</li>
+                    <li class="dropdownItem">Gibraltar</li>
+                    <li class="dropdownItem">Greece</li>
+                    <li class="dropdownItem">Grenada</li>
+                    <li class="dropdownItem">Greenland</li>
+                    <li class="dropdownItem">Grenada</li>
+                    <li class="dropdownItem">Guadeloupe</li>
+                    <li class="dropdownItem">Guam</li>
+                    <li class="dropdownItem">Guatemala</li>
+                    <li class="dropdownItem">Guinea</li>
+                    <li class="dropdownItem">Guinea-Bissau</li>
+                    <li class="dropdownItem">Guyana</li>
+                    <li class="dropdownItem">Haiti</li>
+                    <li class="dropdownItem">Heard Island and McDonalds Islands</li>
+                    <li class="dropdownItem">Honduras</li>
+                    <li class="dropdownItem">Hong Kong</li>
+                    <li class="dropdownItem">Hungary</li>
+                    <li class="dropdownItem">Iceland</li>
+                    <li class="dropdownItem">India</li>
+                    <li class="dropdownItem">Indonesia</li>
+                    <li class="dropdownItem">Iran</li>
+                    <li class="dropdownItem">Iraq</li>
+                    <li class="dropdownItem">Ireland</li>
+                    <li class="dropdownItem">Israel</li>
+                    <li class="dropdownItem">Italy</li>
+                    <li class="dropdownItem">Ivory Coast</li>
+                    <li class="dropdownItem">Jamaica</li>
+                    <li class="dropdownItem">Japan</li>
+                    <li class="dropdownItem">Jordan</li>
+                    <li class="dropdownItem">Kazakhstan</li>
+                    <li class="dropdownItem">Kenya</li>
+                    <li class="dropdownItem">Kiribati</li>
+                    <li class="dropdownItem">Kosovo</li>
+                    <li class="dropdownItem">Kuwait</li>
+                    <li class="dropdownItem">Kyrgyzstan</li>
+                    <li class="dropdownItem">Laos</li>
+                    <li class="dropdownItem">Latvia</li>
+                    <li class="dropdownItem">Lebanon</li>
+                    <li class="dropdownItem">Lesotho</li>
+                    <li class="dropdownItem">Liberia</li>
+                    <li class="dropdownItem">Libya</li>
+                    <li class="dropdownItem">Liechtenstein</li>
+                    <li class="dropdownItem">Lithuania</li>
+                    <li class="dropdownItem">Luxembourg</li>
+                    <li class="dropdownItem">Macau</li>
+                    <li class="dropdownItem">Macedonia</li>
+                    <li class="dropdownItem">Madagascar</li>
+                    <li class="dropdownItem">Malawi</li>
+                    <li class="dropdownItem">Malaysia</li>
+                    <li class="dropdownItem">Maldives</li>
+                    <li class="dropdownItem">Mali</li>
+                    <li class="dropdownItem">Malta</li>
+                    <li class="dropdownItem">Marshall Islands</li>
+                    <li class="dropdownItem">Martinique</li>
+                    <li class="dropdownItem">Mauritania</li>
+                    <li class="dropdownItem">Mauritius</li>
+                    <li class="dropdownItem">Mayotte</li>
+                    <li class="dropdownItem">Mexico</li>
+                    <li class="dropdownItem">Micronesia</li>
+                    <li class="dropdownItem">Moldova</li>
+                    <li class="dropdownItem">Monaco</li>
+                    <li class="dropdownItem">Mongolia</li>
+                    <li class="dropdownItem">Montenegro</li>
+                    <li class="dropdownItem">Montserrat</li>
+                    <li class="dropdownItem">Morocco</li>
+                    <li class="dropdownItem">Mozambique</li>
+                    <li class="dropdownItem">Myanmar</li>
+                    <li class="dropdownItem">Namibia</li>
+                    <li class="dropdownItem">Nauru</li>
+                    <li class="dropdownItem">Nepal</li>
+                    <li class="dropdownItem">Netherlands Antilles</li>
+                    <li class="dropdownItem">Netherlands</li>
+                    <li class="dropdownItem">New Caledonia</li>
+                    <li class="dropdownItem">New Zealand</li>
+                    <li class="dropdownItem">Nicaragua</li>
+                    <li class="dropdownItem">Niger</li>
+                    <li class="dropdownItem">Nigeria</li>
+                    <li class="dropdownItem">Niue</li>
+                    <li class="dropdownItem">Norfolk Island</li>
+                    <li class="dropdownItem">North Korea</li>
+                    <li class="dropdownItem">Norway</li>
+                    <li class="dropdownItem">Oman</li>
+                    <li class="dropdownItem">Pakistan</li>
+                    <li class="dropdownItem">Palau</li>
+                    <li class="dropdownItem">Panama</li>
+                    <li class="dropdownItem">Papua New Guinea</li>
+                    <li class="dropdownItem">Paraguay</li>
+                    <li class="dropdownItem">Peru</li>
+                    <li class="dropdownItem">Philippines</li>
+                    <li class="dropdownItem">Pitcairn</li>
+                    <li class="dropdownItem">Poland</li>
+                    <li class="dropdownItem">Portugal</li>
+                    <li class="dropdownItem">Puerto Rico</li>
+                    <li class="dropdownItem">Qatar</li>
+                    <li class="dropdownItem">Reunion</li>
+                    <li class="dropdownItem">Romania</li>
+                    <li class="dropdownItem">Russia</li>
+                    <li class="dropdownItem">Rwanda</li>
+                    <li class="dropdownItem">Saint Helena</li>
+                    <li class="dropdownItem">Saint Kitts and Nevis</li>
+                    <li class="dropdownItem">Saint Lucia</li>
+                    <li class="dropdownItem">Saint Pierre and Miquelon</li>
+                    <li class="dropdownItem">Saint Vincent and the Grenadines</li>
+                    <li class="dropdownItem">Samoa</li>
+                    <li class="dropdownItem">San Marino</li>
+                    <li class="dropdownItem">Sao Tome and Principe</li>
+                    <li class="dropdownItem">Saudi Arabia</li>
+                    <li class="dropdownItem">Senegal</li>
+                    <li class="dropdownItem">Serbia</li>
+                    <li class="dropdownItem">Seychelles</li>
+                    <li class="dropdownItem">Sierra Leone</li>
+                    <li class="dropdownItem">Singapore</li>
+                    <li class="dropdownItem">Slovakia</li>
+                    <li class="dropdownItem">Slovenia</li>
+                    <li class="dropdownItem">Solomon Islands</li>
+                    <li class="dropdownItem">Somalia</li>
+                    <li class="dropdownItem">South Africa</li>
+                    <li class="dropdownItem">South Georgia and the South Sandwich Islands</li>
+                    <li class="dropdownItem">South Korea</li>
+                    <li class="dropdownItem">Spain</li>
+                    <li class="dropdownItem">Sri Lanka</li>
+                    <li class="dropdownItem">Sudan</li>
+                    <li class="dropdownItem">Suriname</li>
+                    <li class="dropdownItem">Swaziland</li>
+                    <li class="dropdownItem">Sweden</li>
+                    <li class="dropdownItem">Switzerland</li>
+                    <li class="dropdownItem">Syria</li>
+                    <li class="dropdownItem">Taiwan</li>
+                    <li class="dropdownItem">Tajikistan</li>
+                    <li class="dropdownItem">Tanzania</li>
+                    <li class="dropdownItem">Thailand</li>
+                    <li class="dropdownItem">Togo</li>
+                    <li class="dropdownItem">Tokelau</li>
+                    <li class="dropdownItem">Tonga</li>
+                    <li class="dropdownItem">Trinidad and Tobago</li>
+                    <li class="dropdownItem">Tunisia</li>
+                    <li class="dropdownItem">Turkey</li>
+                    <li class="dropdownItem">Turkmenistan</li>
+                    <li class="dropdownItem">Turks and Caicos Islands</li>
+                    <li class="dropdownItem">Tuvalu</li>
+                    <li class="dropdownItem">U.S. Virgin Islands</li>
+                    <li class="dropdownItem">Uganda</li>
+                    <li class="dropdownItem">Ukraine</li>
+                    <li class="dropdownItem">United Arab Emirates</li>
+                    <li class="dropdownItem">United Kingdom</li>
+                    <li class="dropdownItem">United States</li>
+                    <li class="dropdownItem">Uruguay</li>
+                    <li class="dropdownItem">Uzbekistan</li>
+                    <li class="dropdownItem">Vanuatu</li>
+                    <li class="dropdownItem">Vatican City</li>
+                    <li class="dropdownItem">Venezuela</li>
+                    <li class="dropdownItem">Vietnam</li>
+                    <li class="dropdownItem">Yemen</li>
+                    <li class="dropdownItem">Zambia</li>
+                    <li class="dropdownItem">Zimbabwe</li>
+                </ul>
+            </div>
+        </div>
         <button onclick="handleSelectedCountry()">Choose country</button>
     </div>
-    <p class="headerText">Selected country:</p>
-    <p id="selectedCountry">Select a country</p>
     <div class="emergencyContacts" id="selectedEmergencyContactsField">
         <p>Emergency Contacts</p>
         <div id="selectedEmergencyContacts"></div>
     </div>
 </div>
-<!--
-<div class="dropdown-box">
-    <div class="dropdown-header">
-        <label for="dropdown-field">Selected country</label>
-        <input type="text" name="" value="Select" readonly=readonly id="dropdown-field">
-    </div>
-    <div class="dropdown-body">
-        <div class="dropdown-search">
-            <label for="search-box">Search for a country</label>
-            <input type="text" id="search-box">
-        </div>
-        <ul>
-            <li class="dropdown-item active">Select</li>
-            <li class="dropdown-item">Afghanistan</li>
-            <li class="dropdown-item">Albania</li>
-            <li class="dropdown-item">Algeria</li>
-            <li class="dropdown-item">American Samoa</li>
-            <li class="dropdown-item">Andorra</li>
-            <li class="dropdown-item">Angola</li>
-            <li class="dropdown-item">Anguilla</li>
-            <li class="dropdown-item">Antarctica</li>
-            <li class="dropdown-item">Antigua and Barbuda</li>
-            <li class="dropdown-item">Argentina</li>
-            <li class="dropdown-item">Armenia</li>
-            <li class="dropdown-item">Aruba</li>
-            <li class="dropdown-item">Australia</li>
-            <li class="dropdown-item">Austria</li>
-            <li class="dropdown-item">Azerbaijan</li>
-            <li class="dropdown-item">Bahamas</li>
-            <li class="dropdown-item">Bahrain</li>
-            <li class="dropdown-item">Bangladesh</li>
-            <li class="dropdown-item">Barbados</li>
-        </ul>
-    </div>
-
-</div>-->
 </body>
 </html>
