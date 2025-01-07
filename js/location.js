@@ -28,6 +28,8 @@ function handlePosition(position) {
                     document.getElementById("locationEmergencyContacts").innerHTML = handleEmergencyContacts(emergencyContacts);
                 }
             );
+            //Remove potential earlier error messages.
+            document.getElementById("locationError").innerHTML = "";
         }
     ).catch(error => {
             console.log(error);
@@ -66,6 +68,8 @@ function handleSelectedCountry() {
                 document.getElementById("selectedEmergencyContactsField").style.visibility = "visible";
             }
         )
+        //Remove potential earlier error messages.
+        document.getElementById("selectedError").innerHTML = "";
     }).catch(error => {
             console.log(error);
             document.getElementById("selectedError").innerHTML = "Error: " + error.message;

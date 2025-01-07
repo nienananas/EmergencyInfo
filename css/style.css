@@ -34,7 +34,7 @@ header {
     display: flex;
 }
 
-#headerImage{
+#headerImage {
     padding: 2px;
     height: 100%;
     margin-left: 2px;
@@ -43,18 +43,17 @@ header {
 
 header h1 {
     line-height: 50px;
-    padding-left: 4px;
+    padding-left: 6px;
 }
 
 /* Style for an wrapper element on the website */
 .wrapper-element {
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin: 5px 3px;
     padding: 5px;
 
     border: #3489eb solid 3px;
     border-radius: 5px;
-    width: 97%;
+    width: 95%;
 }
 
 /* Style for the emergency contact sections */
@@ -101,11 +100,12 @@ dd {
 
 /* Styles for the country search */
 #countrySearch {
-    margin: 6px;
+    margin-top: 4px;
     padding: 4px;
     height: 40px;
+    width: 95%;
     border: black solid 2px;
-    border-radius: 2px;
+    border-radius: 5px;
     position: relative;
     list-style-position: outside;
 }
@@ -113,14 +113,52 @@ dd {
 /* Responsive Design for tablets */
 @media screen and (min-width: 768px) {
 
+    header {
+        height: 60px;
+    }
+
+    header h1 {
+        font-size: 35px;
+        line-height: 60px;
+        padding-left: 10px;
+    }
+
+
+    .wrapper-element {
+        margin: 2px;
+        width: 47%;
+    }
+
+    #currentLocation {
+        float: left;
+    }
+
+    #selectedLocation {
+        float: right;
+    }
 }
 
 /* Responsive Design for laptops/computers */
 @media screen and (min-width: 1000px) {
 
+    header {
+        height: 70px;
+        margin-bottom: 10px;
+    }
+
+    header h1 {
+        font-size: 45px;
+        line-height: 70px;
+        padding-left: 10px;
+    }
+
+    * {
+        font-size: 35px;
+    }
 
     .wrapper-element {
-        margin: 2px;
+        padding: 8px;
+        margin: 0 8px;
         width: 48%;
     }
 
@@ -130,5 +168,17 @@ dd {
 
     #selectedLocation {
         float: right;
+    }
+
+    #countrySearch {
+        margin: 10px 0;
+        height: 45px;
+        width: 98%;
+    }
+
+    .emergencyContacts p {
+        margin-top: 5px;
+        font-weight: bold;
+        font-size: 40px;
     }
 }
