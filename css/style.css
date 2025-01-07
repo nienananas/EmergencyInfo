@@ -4,6 +4,11 @@
     font-size: 30px;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
 }
 
 button {
@@ -53,7 +58,7 @@ header h1 {
 
     border: #3489eb solid 3px;
     border-radius: 5px;
-    width: 95%;
+    width: 97%;
 }
 
 /* Style for the emergency contact sections */
@@ -110,6 +115,21 @@ dd {
     list-style-position: outside;
 }
 
+/* Styles for the dropdown */
+
+.dropdown-box {
+    display: flex;;
+    width: 300px;
+    justify-content: center;
+    padding: 40px;
+}
+
+.dropdown-box input {
+    border: black solid 1px;
+    outline: none;
+    border-radius: 5px;
+}
+
 /* Responsive Design for tablets */
 @media screen and (min-width: 768px) {
 
@@ -125,8 +145,8 @@ dd {
 
 
     .wrapper-element {
-        margin: 2px;
-        width: 47%;
+        flex: 1;
+        width: 48%;
     }
 
     #currentLocation {
@@ -157,6 +177,7 @@ dd {
     }
 
     .wrapper-element {
+        flex: 1;
         padding: 8px;
         margin: 0 8px;
         width: 48%;

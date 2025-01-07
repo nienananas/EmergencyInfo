@@ -1,9 +1,9 @@
 //API for doing reverse geocoding (location -> OSM object) from openstreetmap
-const reverseGeocodingApiURL = "https://nominatim.openstreetmap.org/reverse"
+const reverseGeocodingApiURL = "https://nominatim.openstreetmap.org/reverse";
 
 //Location of the data source for the mappings between countries and their respective country code.
 //The source provided here is from https://gist.github.com/kalinchernev/486393efcca01623b18d and was updated a bit.
-const countryCodesSource = "../resources/countryCodes.json"
+const countryCodesSource = "../resources/countryCodes.json";
 
 //Gets the current location of the device if supported.
 //If supported, the position is passed on for handling. Otherwise, an error message is displayed.
@@ -21,7 +21,7 @@ function getLocation() {
 function handlePosition(position) {
     getCountryInformation(position).then(
         data => {
-            let countryCode = data["address"]["country_code"]
+            let countryCode = data["address"]["country_code"];
             document.getElementById("locationCountry").textContent = data["address"]["country"];
             getEmergencyContacts(countryCode).then(
                 emergencyContacts => {
@@ -44,7 +44,6 @@ function getCountryInformation(position) {
     return fetch(reverseGeocodingApiURL + `?lat=${position.coords.latitude}&lon=${position.coords.longitude}&format=json`)
         .then(response => {
             if (!response.ok) {
-                document.getElementById("dump").innerHTML = response.message;
                 if (response.status === 404) {
                     throw new Error('Data not found');
                 } else if (response.status === 500) {
