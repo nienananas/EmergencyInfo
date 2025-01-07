@@ -3,7 +3,7 @@ const reverseGeocodingApiURL = "https://nominatim.openstreetmap.org/reverse";
 
 //Location of the data source for the mappings between countries and their respective country code.
 //The source provided here is from https://gist.github.com/kalinchernev/486393efcca01623b18d and was updated a bit.
-const countryCodesSource = "../resources/countryCodes.json";
+const countryCodesSource = "../EmergencyInfo/resources/countryCodes.json";
 
 //Gets the current location of the device if supported.
 //If supported, the position is passed on for handling. Otherwise, an error message is displayed.
