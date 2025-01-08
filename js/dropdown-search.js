@@ -1,6 +1,6 @@
 window.addEventListener("load", () => {
 
-        //Adds an event listener for opening & closing the dropdown
+        // Adds an event listener for opening & closing the dropdown
         window.addEventListener("click", (click) => {
             const dropdownElement = document.querySelector(".dropdownContent");
             const dropdown = document.getElementById("countryDropdown");
@@ -14,15 +14,17 @@ window.addEventListener("load", () => {
             }
         })
 
-        //Adds a click event-listener to every dropdown item for selecting the item
+        // Adds a click event-listener to every dropdown item for selecting the item
         const dropdownItems = document.querySelectorAll(".dropdownItem");
         dropdownItems.forEach(dropdownItem => {
             dropdownItem.addEventListener("click", () => {
                 const dropdownField = document.getElementById("dropdownField");
 
-                //Deselecting the previous item
+                // Deselecting the previous item
                 const selectedItem = document.querySelector(".selected");
-                selectedItem.classList.remove("selected");
+                if (selectedItem != null) {
+                    selectedItem.classList.remove("selected");
+                }
 
 
                 dropdownItem.classList.add("selected");
@@ -51,7 +53,7 @@ function closeDropdown() {
     const dropdown = document.getElementById("countryDropdown");
     dropdown.classList.remove("active");
 
-    //Reverses the previous filter
+    // Reverses the previous filter
     dropdownSearch.value = "";
     const hiddenElements = document.querySelectorAll(".hidden");
     hiddenElements.forEach(hiddenElement => {

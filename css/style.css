@@ -51,6 +51,21 @@ header h1 {
     padding-left: 6px;
 }
 
+/* Style for the icons */
+#locationIcon {
+    width: 30px;
+    position: absolute;
+    left: 91%;
+    top: 6px;
+}
+
+#searchIcon {
+    width: 50px;
+    position: absolute;
+    left: 88%;
+    top: -1px;
+}
+
 /* Style for an wrapper element on the website */
 .wrapper-element {
     margin: 5px 3px;
@@ -59,6 +74,7 @@ header h1 {
     border: #3489eb solid 3px;
     border-radius: 5px;
     width: 97%;
+    position: relative;
 }
 
 /* Style for the emergency contact sections */
@@ -104,19 +120,7 @@ dd {
     display: none;
 }
 
-/* Styles for the country search */
-#countrySearch {
-    margin-top: 4px;
-    padding: 4px;
-    height: 40px;
-    width: 95%;
-    border: black solid 2px;
-    border-radius: 5px;
-    position: relative;
-    list-style-position: outside;
-}
-
-/* Styles for the dropdown */
+/* Styles for the country search dropdown */
 .dropdownBox {
     display: inline-block;
 
@@ -159,7 +163,7 @@ dd {
 .dropdownBox .dropdownContent {
     box-shadow: 0 5px 15px black;
     border-radius: 5px;
-    max-height: 370px;
+    max-height: 260px;
     overflow-y: auto;
     display: none;
     position: absolute;
@@ -184,6 +188,7 @@ dd {
 .dropdownBox .dropdownContent ul li {
     padding: 2px 5px;
     cursor: pointer;
+    font-size: 25px;
 }
 
 .dropdownBox .dropdownContent ul li.hidden {
@@ -199,6 +204,13 @@ dd {
     color: midnightblue;
 }
 
+#dropdownFieldLabel {
+    font-weight: bold;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
 /* Responsive Design for tablets */
 @media screen and (min-width: 768px) {
 
@@ -212,7 +224,6 @@ dd {
         padding-left: 10px;
     }
 
-
     .wrapper-element {
         flex: 1;
         width: 48%;
@@ -224,6 +235,24 @@ dd {
 
     #selectedLocation {
         float: right;
+    }
+
+    #dropdownFieldLabel {
+        padding-top: 3px;
+    }
+
+    #locationIcon {
+        width: 40px;
+        position: absolute;
+        left: 87%;
+        top: 7px;
+    }
+
+    #searchIcon {
+        width: 55px;
+        position: absolute;
+        left: 85%;
+        top: 1px
     }
 }
 
@@ -270,5 +299,13 @@ dd {
         margin-top: 5px;
         font-weight: bold;
         font-size: 40px;
+    }
+
+    .dropdownBox .dropdownContent ul li {
+        font-size: 30px;
+    }
+
+    .dropdownBox .dropdownContent {
+        max-height: 500px;
     }
 }
