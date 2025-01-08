@@ -10,7 +10,9 @@ const countryCodesSource = "../EmergencyInfo/resources/countryCodes.json";
 //If supported, the position is passed on for handling. Otherwise, an error message is displayed.
 function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(handlePosition);
+        navigator.geolocation.getCurrentPosition(handlePosition, (error) => {
+            document.getElementById("locationError").innerHTML = error.message;
+        });
     } else {
         document.getElementById("locationError").innerHTML = "Geolocation is not supported by this browser.";
     }
