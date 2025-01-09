@@ -1,3 +1,4 @@
+//Adds a load event listener to the window, that in turn adds eventListeners needed for the dropdown.
 window.addEventListener("load", () => {
 
         // Adds an event listener for opening & closing the dropdown
@@ -48,6 +49,9 @@ window.addEventListener("load", () => {
     }
 )
 
+/**
+ * Closes the dropdown and removes the previous filter.
+ */
 function closeDropdown() {
     const dropdownSearch = document.getElementById("searchBox");
     const dropdown = document.getElementById("countryDropdown");
@@ -61,6 +65,9 @@ function closeDropdown() {
     })
 }
 
+/**
+ * Opens the dropdown.
+ */
 function openDropdown() {
     const dropdown = document.getElementById("countryDropdown");
     dropdown.classList.add("active");

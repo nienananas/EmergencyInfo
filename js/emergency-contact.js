@@ -1,9 +1,13 @@
-//Since the emergencynumberapi (https://emergencynumberapi.com/) does not send CORS headers in the reply,
-//the data is stored locally. It might contain some errors or be incomplete.
-//Because the site is hosted on github pages, the src path is appended by "/EmergencyInfo".
+/**
+ * Since the emergencynumberapi (https://emergencynumberapi.com/) does not send CORS headers in the reply,
+ * the data is stored locally. It might contain some errors or be incomplete.
+ * Because the site is hosted on github pages, the src path is appended by "/EmergencyInfo".
+ */
 const emergencyContactsSource = "../EmergencyInfo/resources/emergencyContactData.json";
 
-//Gets the emergency contact data, prepares them and passes them on for handling.
+/**
+ * Gets the emergency contact data, prepares them and passes them on for handling.
+ */
 function getEmergencyContacts(countryCode) {
     return fetch(emergencyContactsSource)
         .then(response => {
@@ -24,7 +28,9 @@ function getEmergencyContacts(countryCode) {
         })
 }
 
-//Handles the emergency contact data that was fetched.
+/**
+ * Handles the emergency contact data that was fetched.
+ */
 function handleEmergencyContacts(emergencyContactJSON) {
     if (emergencyContactJSON["LocalOnly"]) {
         return `<span>You need to contact local emergency contacts. There is no service extending to all the country.</span>`;
@@ -52,22 +58,30 @@ function handleEmergencyContacts(emergencyContactJSON) {
     return emergencyString + "</dl>";
 }
 
-//Gets information on the police emergency contact numbers
+/**
+ * Gets information on the police emergency contact numbers
+ */
 function getPoliceInformation(emergencyContactJSON) {
     return getNumbersOfCategory(emergencyContactJSON, "Police", "Police");
 }
 
-//Gets information on the fire emergency contact numbers
+/**
+ * Gets information on the fire emergency contact numbers
+ */
 function getFireInformation(emergencyContactJSON) {
     return getNumbersOfCategory(emergencyContactJSON, "Fire", "Fire");
 }
 
-//Gets information on the ambulance emergency contact numbers
+/**
+ * Gets information on the ambulance emergency contact numbers
+ */
 function getAmbulanceInformation(emergencyContactJSON) {
     return getNumbersOfCategory(emergencyContactJSON, "Ambulance", "Ambulance");
 }
 
-//Checks if the country has numbers in a certain category.
+/**
+ * Checks if the country has numbers in a certain category.
+ */
 function hasNumbersInCategory(emergencyContactJSON, categoryName) {
     let hasNumbers = false;
     let category = emergencyContactJSON[categoryName];
@@ -88,9 +102,11 @@ function hasNumbersInCategory(emergencyContactJSON, categoryName) {
     return false;
 }
 
-// Function that retrieves numbers for a specific category and returns them in a descriptive list with keys and values.
-// Returns an entry for a descriptive list (dl) with the label as dt and as dd a descriptive list
-// with the numbers as key-value (dt-dd) pairs.
+/**
+ * Function that retrieves numbers for a specific category and returns them in a descriptive list with keys and values.
+ * Returns an entry for a descriptive list (dl) with the label as dt and as dd a descriptive list
+ * with the numbers as key-value (dt-dd) pairs.
+ */
 function getNumbersOfCategory(emergencyContactJSON, categoryName, label) {
     const dispatchNumbers = new Map();
     let dispatch = emergencyContactJSON[categoryName];

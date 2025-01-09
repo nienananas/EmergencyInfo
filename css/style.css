@@ -17,6 +17,16 @@ button {
     background-color: #bed9f7;
     border: none;
     border-radius: 7px;
+    box-shadow: 0 5px 10px gray;
+}
+
+button:hover {
+    background-color: lightgray;
+}
+
+button:active {
+    background-color: lightgrey;
+    padding: 9px;
 }
 
 .headerText {
@@ -53,17 +63,22 @@ header h1 {
 
 /* Style for the icons */
 #locationIcon {
-    width: 30px;
-    position: absolute;
-    left: 91%;
-    top: 6px;
+    width: 25px;
+    transform: translateX(-2px);
+}
+
+#locationBar {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
 }
 
 #searchIcon {
-    width: 50px;
-    position: absolute;
-    left: 88%;
-    top: -1px;
+    width: 40px;
+    float: right;
+    padding: 0;
+    margin: 0;
+    transform: translateY(-2px);
 }
 
 /* Style for an wrapper element on the website */
@@ -209,6 +224,7 @@ dd {
     padding-bottom: 10px;
     display: flex;
     flex-direction: column;
+    float: left;
 }
 
 /* Responsive Design for tablets */
@@ -242,17 +258,11 @@ dd {
     }
 
     #locationIcon {
-        width: 40px;
-        position: absolute;
-        left: 87%;
-        top: 7px;
+        width: 30px;
     }
 
     #searchIcon {
-        width: 55px;
-        position: absolute;
-        left: 85%;
-        top: 1px
+        width: 45px;
     }
 }
 

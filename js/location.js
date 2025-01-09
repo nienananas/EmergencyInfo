@@ -1,16 +1,23 @@
-//API for doing reverse geocoding (location -> OSM object) from openstreetmap
+/**
+ * API for doing reverse geocoding (location -> OSM object) from openstreetmap
+ */
 const reverseGeocodingApiURL = "https://nominatim.openstreetmap.org/reverse";
 
-//Location of the data source for the mappings between countries and their respective country code.
-//The source provided here is from https://gist.github.com/kalinchernev/486393efcca01623b18d and was updated a bit.
-//Because the site is hosted on github pages, the src path is appended by "/EmergencyInfo".
+/**
+ * Location of the data source for the mappings between countries and their respective country code.
+ * The source provided here is from https://gist.github.com/kalinchernev/486393efcca01623b18d and was updated a bit.
+ * Because the site is hosted on github pages, the src path is appended by "/EmergencyInfo".
+ */
 const countryCodesSource = "../EmergencyInfo/resources/countryCodes.json";
 
-//Gets the current location of the device if supported.
-//If supported, the position is passed on for handling. Otherwise, an error message is displayed.
+/**
+ * Gets the current location of the device if supported.
+ * If supported, the position is passed on for handling. Otherwise, an error message is displayed.
+ */
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(handlePosition, (error) => {
+            console.log(error);
             document.getElementById("locationError").innerHTML = error.message;
         });
     } else {
@@ -18,9 +25,11 @@ function getLocation() {
     }
 }
 
-//Handles the current position of the device.
-//First more information about the position such as the current address is retrieved and displayed.
-//Then the emergency contact information about the current country is retrieved and displayed.
+/**
+ * Handles the current position of the device.
+ * First more information about the position such as the current address is retrieved and displayed.
+ * Then the emergency contact information about the current country is retrieved and displayed.
+ */
 function handlePosition(position) {
     getCountryInformation(position).then(
         data => {
@@ -41,8 +50,10 @@ function handlePosition(position) {
     );
 }
 
-//Uses the reverse geocoding API to retrieve data about the country (OSM object) from the position.
-//Returns a promise containing the data or throws an error if something is wrong with the request.
+/**
+ * Uses the reverse geocoding API to retrieve data about the country (OSM object) from the position.
+ * Returns a promise containing the data or throws an error if something is wrong with the request.
+ */
 function getCountryInformation(position) {
     return fetch(reverseGeocodingApiURL + `?lat=${position.coords.latitude}&lon=${position.coords.longitude}&format=json`)
         .then(response => {
@@ -59,9 +70,11 @@ function getCountryInformation(position) {
         })
 }
 
-//Function that handles the input of a selected country.
-//Retrieves the selected country code and gets the emergency information for the country and displays it.
-//On error, the error message is displayed.
+/**
+ * Function that handles the input of a selected country.
+ * Retrieves the selected country code and gets the emergency information for the country and displays it.
+ * On error, the error message is displayed.
+ */
 function handleSelectedCountry() {
     getSelectedCountry().then(country => {
         getEmergencyContacts(country["iso_code"]).then(emergencyContacts => {
@@ -78,9 +91,11 @@ function handleSelectedCountry() {
     )
 }
 
-//Gets the country code of the country selected in the country select dropdown.
-//Returns a promise containing the country code on success.
-//Throws an error if an invalid country is selected.
+/**
+ * Gets the country code of the country selected in the country select dropdown.
+ * Returns a promise containing the country code on success.
+ * Throws an error if an invalid country is selected.
+ */
 function getSelectedCountry() {
     const selectedCountry = document.getElementById("dropdownField").value;
     return fetch(countryCodesSource).then(response => {

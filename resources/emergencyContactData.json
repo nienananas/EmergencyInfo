@@ -951,7 +951,12 @@
     },
     "Police": {
       "All": [
-        null
+        "194"
+      ]
+    },
+    "Traffic": {
+      "All": [
+        "195"
       ]
     },
     "Dispatch": {
@@ -959,7 +964,7 @@
         ""
       ]
     },
-    "Member_112": true,
+    "Member_112": false,
     "LocalOnly": false,
     "Notes": ""
   },

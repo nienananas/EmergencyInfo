@@ -20,13 +20,16 @@
         Emergency Info
     </h1>
 </header>
+<a href="tel:+49 721 608-0">Call</a>
 <div id="currentLocation" class="wrapper-element">
-    <img src="resources/location-icon.svg" alt="Location Icon" class="icon" id="locationIcon">
     <p class="errorMessage" id="locationError"></p>
     <div>
-        <p class="headerText">Your Country:</p>
-        <p id="locationCountry">Loading...</p>
+        <div id="locationBar">
+            <p class="headerText" id="locationDescription">Your location:</p>
+            <img src="resources/location-icon.svg" alt="Location Icon" class="icon" id="locationIcon">
+        </div>
     </div>
+    <p id="locationCountry">Loading...</p>
     <div class="emergencyContacts" id="locationEmergencyContactsField">
         <p>Emergency Contacts</p>
         <div id="locationEmergencyContacts">Loading...</div>
@@ -36,11 +39,11 @@
     </button>
 </div>
 <div id="selectedLocation" class="wrapper-element">
-    <img src="resources/search-icon.svg" alt="Search Icon" class="icon" id="searchIcon">
     <p class="errorMessage" id="selectedError"></p>
     <div>
         <div class="dropdownBox" id="countryDropdown">
             <div class="selectedItem">
+                <img src="resources/search-icon2.svg" alt="Search Icon" class="icon" id="searchIcon">
                 <label for="dropdownField" id="dropdownFieldLabel">Selected country:</label>
                 <input type="text" name="" placeholder="Select a country" readonly=readonly id="dropdownField">
             </div>
