@@ -12,7 +12,7 @@ In addition, users can search for a specific country that they want information 
 
 ## Data Sources
 For retrieving the country the user is located in, the website uses the OpenStreetMap [Nominatim](https://nominatim.openstreetmap.org/reverse) API.
-The data for the emergency contact information is from the source from [EmergencyNumberAPI](https://emergencynumberapi.com/).
+The data for the emergency contact information is from the source of the [EmergencyNumberAPI](https://emergencynumberapi.com/) and was updated a bit with the data from [Wikipedia](https://en.wikipedia.org/wiki/List_of_emergency_telephone_numbers).
 
 ## GitHub Pages
 The site is currently running on [GitHub Pages](https://nienananas.github.io/EmergencyInfo/) (as of 07.01.2025).
