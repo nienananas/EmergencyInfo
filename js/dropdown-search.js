@@ -71,5 +71,4 @@ function closeDropdown() {
 function openDropdown() {
     const dropdown = document.getElementById("countryDropdown");
     dropdown.classList.add("active");
-
 }
