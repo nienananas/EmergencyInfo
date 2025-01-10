@@ -45,8 +45,11 @@ function handleEmergencyContacts(emergencyContactJSON) {
     emergencyString += getPoliceInformation(emergencyContactJSON);
     if (emergencyContactJSON["Member_112"]) {
         //Formating for matching the pattern for get[Police|Fire|Ambulance]Information
-        emergencyString += `<dt class="departmentLabel">Fire</dt><dd><dl><dt>All</dt><dd>112</dd></dl></dd>`;
-        emergencyString += `<dt class="departmentLabel">Ambulance</dt><dd><dl><dt>All</dt><dd>112</dd></dl></dd>`;
+        //This is necessary because of the imperfect structure of the emergencyContactData JSON.
+        //If a country uses the number 112, the numbers are not stored under Ambulance/Fire but rather a boolean is set to true.
+        //Therefore, it is necessary to format this string here manually and the use of getNumbersOfCategory is not possible.
+        emergencyString += `<dt class="departmentLabel">Fire</dt><dd><dl><dt>All</dt><dd><a href="tel:112" onclick="return confirmAction()">✆112</a></dd></dl></dd>`;
+        emergencyString += `<dt class="departmentLabel">Ambulance</dt><dd><dl><dt>All</dt><dd><a href="tel:112" onclick="return confirmAction()">✆112</a></dd></dl></dd>`;
     } else {
         emergencyString += getFireInformation(emergencyContactJSON);
         emergencyString += getAmbulanceInformation(emergencyContactJSON);
@@ -108,18 +111,23 @@ function hasNumbersInCategory(emergencyContactJSON, categoryName) {
  * with the numbers as key-value (dt-dd) pairs.
  */
 function getNumbersOfCategory(emergencyContactJSON, categoryName, label) {
-    const dispatchNumbers = new Map();
-    let dispatch = emergencyContactJSON[categoryName];
-    if (dispatch) {
-        for (const key in dispatch) {
-            dispatchNumbers.set(key, dispatch[key]);
+    const numbers = new Map();
+    let category = emergencyContactJSON[categoryName];
+    if (category) {
+        for (const key in category) {
+            numbers.set(key, category[key]);
         }
     }
     let returnString = `<dt class="departmentLabel">${label}</dt><dd><dl>`;
-    dispatchNumbers.forEach((value, key) => {
-        if (value) {
-            returnString += `<dt>${key}</dt> <dd>${value}</dd>`;
+    numbers.forEach((number, key) => {
+        if (number) {
+            returnString += `<dt>${key}</dt> <dd><a href="tel:${number}" onclick="return confirmAction()">✆${number}</a></dd>`;
         }
     });
     return returnString += "</dl></dd>"
+}
+
+//Prompts the user to confirm if he wants to pursue the telefone link.
+function confirmAction() {
+    return confirm("Do you really want to call this emergency number? Do so only in real emergencies!")
 }

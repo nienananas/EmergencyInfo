@@ -11,6 +11,10 @@ body {
     width: 100vw;
 }
 
+a {
+    color: midnightblue;
+}
+
 button {
     padding: 10px;
     margin: 10px;
@@ -18,10 +22,6 @@ button {
     border: none;
     border-radius: 7px;
     box-shadow: 0 5px 10px gray;
-}
-
-button:hover {
-    background-color: lightgray;
 }
 
 button:active {
@@ -272,6 +272,8 @@ dd {
         padding-top: 3px;
     }
 
+    /* Resize the icons */
+
     .centering {
         transform: translateY(-38px);
     }
@@ -293,6 +295,10 @@ dd {
 /* Responsive Design for laptops/computers */
 @media screen and (min-width: 1000px) {
 
+    * {
+        font-size: 35px;
+    }
+
     header {
         height: 70px;
         margin-bottom: 10px;
@@ -302,10 +308,6 @@ dd {
         font-size: 45px;
         line-height: 70px;
         padding-left: 15px;
-    }
-
-    * {
-        font-size: 35px;
     }
 
     .wrapper-element {
@@ -346,6 +348,7 @@ dd {
         max-height: 500px;
     }
 
+    /* Resize the icons */
     .iconContainer {
         height: 85px;
         width: 85px;
@@ -362,5 +365,10 @@ dd {
     .centering {
         transform: translateY(-50px);
         margin-bottom: -40px;
+    }
+
+    /* Add hover effect only on devices where there is a high possibility that the user uses a mouse. */
+    button:hover {
+        background-color: lightgray;
     }
 }
