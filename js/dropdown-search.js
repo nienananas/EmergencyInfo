@@ -7,7 +7,7 @@ window.addEventListener("load", () => {
             const dropdown = document.getElementById("countryDropdown");
             const dropdownField = document.getElementById("dropdownField");
 
-
+            //Check if the user has clicked on the dropdown or if the user has clicked somewhere else to close it.
             if (dropdown.classList.contains("active") && !dropdownElement.contains(click.target)) {
                 closeDropdown();
             } else if (dropdownField.contains(click.target)) {
@@ -27,7 +27,7 @@ window.addEventListener("load", () => {
                     selectedItem.classList.remove("selected");
                 }
 
-
+                //Selecting the new item
                 dropdownItem.classList.add("selected");
                 dropdownField.value = dropdownItem.innerHTML;
                 closeDropdown()
@@ -38,6 +38,7 @@ window.addEventListener("load", () => {
         const searchInput = document.getElementById("searchBox");
         searchInput.addEventListener("keyup", () => {
             const filter = searchInput.value.toLowerCase();
+            //Filter out the non-matching entries.
             dropdownItems.forEach(dropdownItem => {
                 if (dropdownItem.innerHTML.toLowerCase().includes(filter)) {
                     dropdownItem.classList.remove("hidden");
@@ -57,7 +58,7 @@ function closeDropdown() {
     const dropdown = document.getElementById("countryDropdown");
     dropdown.classList.remove("active");
 
-    // Reverses the previous filter
+    //Resets the filter so that all elements are shown
     dropdownSearch.value = "";
     const hiddenElements = document.querySelectorAll(".hidden");
     hiddenElements.forEach(hiddenElement => {

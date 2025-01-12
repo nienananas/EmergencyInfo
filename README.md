@@ -20,5 +20,6 @@ The phone numbers displayed on the website are clickable for faster access in ca
 When clicked, the user is prompted to confirm his wish to actually call the number.
 Then he will be transferred to the app that handles "tel:..." links.
 
-## GitHub Pages
-The site is currently running on [GitHub Pages](https://nienananas.github.io/EmergencyInfo/) (as of 07.01.2025).
+## How to run the Website
+The website can't be started by simply opening the index.html file.
+Instead, the site is currently running on [GitHub Pages](https://nienananas.github.io/EmergencyInfo/) (as of 12.01.2025).

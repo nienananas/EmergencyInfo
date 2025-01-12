@@ -370,5 +370,6 @@ dd {
     /* Add hover effect only on devices where there is a high possibility that the user uses a mouse. */
     button:hover {
         background-color: lightgray;
+        cursor: pointer;
     }
 }
